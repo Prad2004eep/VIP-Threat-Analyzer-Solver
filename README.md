@@ -1,4 +1,4 @@
-# React
+# VIP-Online-Threat-Protector
 
 A modern React-based project utilizing the latest frontend technologies and tools for building responsive web applications.
 
@@ -100,8 +100,8 @@ npm run build
 
 ## 🙏 Acknowledgments
 
-- Built with [Rocket.new](https://rocket.new)
+- Built by Coding Warriors
 - Powered by React and Vite
 - Styled with Tailwind CSS
 
-Built with ❤️ on Rocket.new
+Built with ❤️ on VS Code
