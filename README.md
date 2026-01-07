@@ -1,4 +1,4 @@
-# VIP-Online-Threat-Protector
+# VIP-Digital-Threat-Protector
 
 A modern React-based project utilizing the latest frontend technologies and tools for building responsive web applications.
 
