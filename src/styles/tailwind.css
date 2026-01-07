@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core Colors - Updated to match new theme */
+    --color-background: #0B1426; /* Deep navy blue background */
+    --color-foreground: #F1F5F9; /* Light text */
+    --color-border: rgba(52, 211, 153, 0.15); /* Green border with opacity */
+    --color-input: #1E2A3A; /* Darker navy for inputs */
+    --color-ring: #34D399; /* Emerald green for focus rings */
+
+    /* Card Colors - Dark navy cards */
+    --color-card: #1A2332; /* Slightly lighter navy for cards */
+    --color-card-foreground: #F1F5F9; /* Light text on cards */
+
+    /* Popover Colors */
+    --color-popover: #1A2332; /* Same as cards */
+    --color-popover-foreground: #F1F5F9; /* Light text */
+
+    /* Muted Colors */
+    --color-muted: #2A3441; /* Muted navy */
+    --color-muted-foreground: #94A3B8; /* Muted text */
+
+    /* Primary Colors - Green accent */
+    --color-primary: #34D399; /* Emerald green primary */
+    --color-primary-foreground: #0B1426; /* Dark text on green */
+
+    /* Secondary Colors */
+    --color-secondary: #475569; /* Slate secondary */
+    --color-secondary-foreground: #F1F5F9; /* Light text */
+
+    /* Destructive Colors */
+    --color-destructive: #EF4444; /* Red for destructive actions */
+    --color-destructive-foreground: #F1F5F9; /* Light text */
+
+    /* Accent Colors - Orange accent */
+    --color-accent: #F59E0B; /* Orange accent */
+    --color-accent-foreground: #0B1426; /* Dark text on orange */
+
+    /* Success Colors - Green */
+    --color-success: #10B981; /* Success green */
+    --color-success-foreground: #F1F5F9; /* Light text */
+
+    /* Warning Colors */
+    --color-warning: #EF4444; /* Red for warnings */
+    --color-warning-foreground: #F1F5F9; /* Light text */
+
+    /* Error Colors */
+    --color-error: #DC2626; /* Error red */
+    --color-error-foreground: #F1F5F9; /* Light text */
+
+    /* Surface Color */
+    --color-surface: #1A2332; /* Surface navy */
+
+    /* Text Colors */
+    --color-text-primary: #F1F5F9; /* Primary text */
+    --color-text-secondary: #94A3B8; /* Secondary text */
+
+    /* Threat Level Colors */
+    --threat-level-low: #10B981; /* Green for low threats */
+    --threat-level-medium: #F59E0B; /* Orange for medium threats */
+    --threat-level-high: #EF4444; /* Red for high threats */
+    --threat-level-critical: #DC2626; /* Dark red for critical threats */
+  }
+  
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary;
+  }
+  
+  /* Focus Styles */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+  
+  /* Animation Keyframes */
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .animate-fadeIn {
+    animation: fadeIn 150ms ease-out;
+  }
+  
+  /* Reduced Motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Threat Status Indicators */
+  .threat-indicator {
+    @apply inline-flex items-center justify-center w-3 h-3 rounded-full;
+  }
+  
+  .threat-indicator.low {
+    background-color: var(--threat-level-low);
+  }
+  
+  .threat-indicator.medium {
+    background-color: var(--threat-level-medium);
+  }
+  
+  .threat-indicator.high {
+    background-color: var(--threat-level-high);
+  }
+  
+  .threat-indicator.critical {
+    background-color: var(--threat-level-critical);
+  }
+  
+  /* Connection Status */
+  .connection-status {
+    @apply inline-flex items-center justify-center w-2 h-2 rounded-full;
+  }
+  
+  .connection-status.connected {
+    @apply bg-success;
+  }
+  
+  .connection-status.disconnected {
+    @apply bg-error;
+  }
+  
+  .connection-status.connecting {
+    @apply bg-warning animate-pulse;
+  }
+  
+  /* Navigation Styles */
+.nav-item  {
+    @apply relative flex items-center px-4 py-2 text-sm font-medium text-muted-foreground transition-all duration-150 ease-out hover:text-foreground rounded-full;
+  }
+.nav-item.active  {
+    @apply text-primary;
+  }
+  
+  .nav-item:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Card Styles */
+  .card {
+    @apply bg-card text-card-foreground rounded-full border shadow-sm;
+  }
+  
+  .card-header {
+    @apply flex flex-col space-y-1.5 p-6;
+  }
+  
+  .card-title {
+    @apply text-2xl font-semibold leading-none tracking-tight;
+  }
+  
+  .card-description {
+    @apply text-sm text-muted-foreground;
+  }
+  
+  .card-content {
+    @apply p-6 pt-0;
+  }
+  
+  .card-footer {
+    @apply flex items-center p-6 pt-0;
+  }
+}
+
+@layer utilities {
+  /* Typography Utilities */
+  .font-heading {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .font-body {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+  
+  /* Shadow Utilities */
+  .shadow-tactical {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  }
+  
+  .shadow-tactical-lg {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
+  }
+  
+  .shadow-tactical-xl {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.12), 0 4px 6px rgba(0, 0, 0, 0.24);
+  }
+  
+  /* Spacing Utilities */
+  .space-tactical > * + * {
+    margin-top: 1rem;
+  }
+  
+  /* Interactive Utilities */
+  .interactive-scale {
+    transition: transform 150ms ease-out;
+  }
+  
+  .interactive-scale:hover {
+    transform: scale(1.02);
+  }
+  
+  .interactive-scale:active {
+    transform: scale(0.98);
+  }
+}
